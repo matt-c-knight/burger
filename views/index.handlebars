@@ -1,31 +1,45 @@
+<h1>Burgers to eat!</h1>
 
-<ul>
     {{#each burgers}}
-   
-    <li>
-        <p>
-       {{this.id}}. {{this.burger_name}}
-       </p>
-    </li>
+        {{#unless devoured}}
+            <div data-id={{this.id}}>
+           <p>{{this.id}}. {{this.burger_name}}</p>
+           <button  class="devoured" data-id="{{this.id}}">Devoured!</button>
+           </div>
+        {{/unless}}
     {{/each}}
-</ul>
 
 
 
-{{!-- <ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
+<h1>Burgers that have been devoured!</h1>
 
-
-
-<ul>
+ <ul>
   {{#each burgers}}
     {{#if devoured}}
-      {{> burgers/burger-block devoured=false}}
+       <div data-id={{this.id}}>
+       <p>{{this.id}}. {{this.burger_name}}</p> 
+       </div>
     {{/if}}
   {{/each}}
-</ul> --}}
+</ul>
+
+<script type="text/javascript">
+
+$(".devoured").on("click", function(event) {
+    var id = $(this).data("id");
+    var newDevouredState = {
+      devoured: true
+    };
+    console.log(id)
+     $.ajax("/api/burgers/" + id, {
+      type: "PUT",
+      data: newDevouredState
+    }).then(
+      function() {
+        location.reload();
+      }
+    );
+})
+
+</script>
+
