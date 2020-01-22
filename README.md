@@ -1,8 +1,8 @@
 # burger
 
-<img src="../assets/img/burgapp.png">
+<img src="public/assets/img/burgapp.png">
 
-<img src="../assets/img/burgapp2.png">
+<img src="public/assets/img/burgapp2.png">
 
 Deployed app to Heroku with JawsDB
 
